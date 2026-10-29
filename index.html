@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portofolio Pribadi - Nuzul Taufik</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Embedded CSS (Diringkas & Dioptimalkan) -->
+  <style>
+    :root {
+      --primary: #6C63FF;
+      --primary-dark: #5A52D5;
+      --secondary: #FF6584;
+      --dark: #2D2D3F;
+      --light-bg: #F8F9FE;
+      --card-border: #E5E7EB;
+      --text-muted: #6B7280;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; color: var(--dark); background: #fff; }
+
+    /* Navbar */
+    .navbar { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); box-shadow: 0 2px 20px rgba(0,0,0,0.06); padding: 0.8rem 0; }
+    .navbar-brand { font-weight: 700; font-size: 1.5rem; color: var(--primary) !important; }
+    .navbar-brand span { color: var(--secondary); }
+    .nav-link { font-weight: 500; color: var(--dark) !important; margin: 0 0.5rem; position: relative; }
+    .nav-link::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 2px; background: var(--primary); transition: width 0.3s ease; }
+    .nav-link:hover::after, .nav-link.active::after { width: 70%; }
+    .nav-link:hover, .nav-link.active { color: var(--primary) !important; }
+
+    /* Hero Section */
+    .hero-section { min-height: 100vh; display: flex; align-items: center; background: linear-gradient(135deg, var(--light-bg) 0%, #EDE9FE 100%); position: relative; overflow: hidden; padding-top: 5rem; }
+    .hero-section::before, .hero-section::after { content: ''; position: absolute; border-radius: 50%; pointer-events: none; }
+    .hero-section::before { top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(108,99,255,0.1) 0%, transparent 70%); }
+    .hero-section::after { bottom: -30%; left: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,101,132,0.08) 0%, transparent 70%); }
+    .hero-title { font-size: 3rem; font-weight: 700; line-height: 1.2; }
+    .hero-title .highlight { color: var(--primary); }
+    .hero-subtitle { font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; max-width: 520px; }
+    .hero-img-wrapper img { width: 380px; height: 380px; max-width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 50%; border: 8px solid rgba(255,255,255,0.9); box-shadow: 0 15px 35px rgba(108,99,255,0.25); transition: transform 0.3s, box-shadow 0.3s; }
+    .hero-img-wrapper img:hover { transform: scale(1.03); box-shadow: 0 20px 45px rgba(108,99,255,0.35); }
+    .hero-stats h3 { font-size: 1.75rem; font-weight: 700; color: var(--primary); margin: 0; }
+    .hero-stats p { font-size: 0.85rem; color: #9CA3AF; margin: 0; }
+
+    /* Tombol & Elemen Interaktif */
+    .btn-cta, .btn-submit, .btn-floating { background: var(--primary); color: #fff; border: none; font-weight: 600; border-radius: 50px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(108,99,255,0.35); text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+    .btn-cta { padding: 0.75rem 2rem; }
+    .btn-submit { padding: 0.75rem 2.5rem; width: 100%; }
+    .btn-cta:hover, .btn-submit:hover, .btn-floating:hover { background: var(--primary-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 25px rgba(108,99,255,0.45); }
+    .btn-outline-cta { border: 2px solid var(--primary); color: var(--primary); padding: 0.7rem 2rem; font-weight: 600; border-radius: 50px; background: transparent; transition: all 0.3s; display: inline-flex; align-items: center; text-decoration: none; }
+    .btn-outline-cta:hover { background: var(--primary); color: #fff; transform: translateY(-2px); }
+    .btn-floating { position: fixed; bottom: 2rem; right: 2rem; width: 56px; height: 56px; z-index: 1000; font-size: 1.3rem; }
+
+    /* Bagian & Kartu Konten */
+    .section-title { font-size: 2rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem; }
+    .section-subtitle { color: #9CA3AF; margin-bottom: 3rem; }
+    .profile-section, .contact-section { padding: 5rem 0; background: var(--light-bg); }
+    .projects-section { padding: 5rem 0; background: #fff; }
+    .profile-card, .contact-form-wrapper { background: #fff; border-radius: 20px; box-shadow: 0 4px 25px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.05); }
+    .profile-img { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary); box-shadow: 0 4px 15px rgba(108,99,255,0.25); }
+    .badge-role { background: rgba(108,99,255,0.1); color: var(--primary); font-weight: 600; font-size: 0.85rem; padding: 0.4rem 1.2rem; border-radius: 50px; display: inline-block; }
+    .profile-bio { font-size: 0.95rem; line-height: 1.7; }
+
+    /* Proyek */
+    .project-card { border: 1px solid rgba(0,0,0,0.05); border-radius: 16px; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.05); height: 100%; }
+    .project-card:hover { transform: translateY(-8px); box-shadow: 0 12px 35px rgba(108,99,255,0.15); }
+    .project-card .card-img-top { height: 200px; object-fit: cover; }
+    .badge-tech { background: var(--light-bg); color: var(--primary); font-weight: 500; font-size: 0.75rem; padding: 0.35rem 0.75rem; border-radius: 20px; margin: 0 0.3rem 0.3rem 0; display: inline-block; }
+    .btn-project { color: var(--primary); font-weight: 600; text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+    .btn-project:hover { color: var(--primary-dark); }
+    .btn-project i { transition: transform 0.3s; }
+    .btn-project:hover i { transform: translateX(4px); }
+
+    /* Kontak */
+    .form-control { border: 2px solid var(--card-border); border-radius: 12px; padding: 0.75rem 1rem; font-size: 0.95rem; }
+    .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 0.2rem rgba(108,99,255,0.15); }
+    .contact-info-card { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border-radius: 20px; padding: 2.5rem; color: #fff; height: 100%; }
+    .contact-info-item .icon-box, .social-links a { width: 42px; height: 42px; border-radius: 12px; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: all 0.3s ease; }
+    .social-links a:hover { background: #fff; color: var(--primary); transform: translateY(-3px); }
+    .contact-link { color: #fff; text-decoration: none; transition: transform 0.2s; display: inline-block; }
+    .contact-link:hover { color: #fff; text-decoration: underline; transform: translateX(3px); }
+
+    /* Modal & Sertifikat */
+    .modal-content { border: none; border-radius: 20px; overflow: hidden; }
+    .modal-header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: #fff; padding: 1.5rem 2rem; border: none; }
+    .modal-header .btn-close { filter: invert(1); }
+    .certificate-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-radius: 14px; background: var(--light-bg); }
+    .cert-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .cert-image-wrapper { background: #fdfdfd; border: 1px solid var(--card-border); border-radius: 16px; overflow: hidden; padding: 10px; }
+    .cert-preview-img { max-height: 480px; width: 100%; object-fit: contain; border-radius: 10px; transition: transform 0.3s ease; }
+    .cert-preview-img:hover { transform: scale(1.01); }
+
+    /* Footer & Responsif */
+    footer { background: var(--dark); color: #9CA3AF; padding: 2rem 0; }
+    footer a { color: #9CA3AF; text-decoration: none; transition: color 0.3s; }
+    footer a:hover { color: var(--primary); }
+
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2rem; }
+      .hero-img-wrapper img { width: 280px; height: 280px; }
+      .btn-floating { bottom: 1.25rem; right: 1.25rem; width: 48px; height: 48px; font-size: 1.1rem; }
+      .contact-form-wrapper, .contact-info-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="100" tabindex="0">
+
+  <!--  BAGIAN 1: NAVBAR  -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#hero">Portofolio<span>.Nuzul</span></a>
+      <button class="navbar-toggler border-0 shadow-none" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link active" href="#hero">Beranda</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#profile">Profil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#projects">Proyek</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Kontak</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="btn btn-cta btn-sm px-3" href="#contact">Hubungi Saya</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!--  BAGIAN 2: HERO SECTION  -->
+  <section class="hero-section" id="hero">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 order-2 order-lg-1">
+          <p class="hero-badge text-uppercase fw-semibold text-muted mb-2">
+            👋 Selamat Datang
+          </p>
+          <h1 class="hero-title">
+            Halo, Saya <span class="highlight">Nuzul Taufik</span>
+          </h1>
+          <p class="hero-subtitle mt-3">
+            Seorang mahasiswa yang bersemangat di bidang <strong>Web Development</strong> &amp; <strong>UI/UX Design</strong>. 
+            Saya suka menciptakan pengalaman digital yang menarik dan fungsional.
+          </p>
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <a href="#projects" class="btn btn-cta">
+              <i class="bi bi-folder2-open me-2"></i>Lihat Proyek
+            </a>
+            <button class="btn btn-outline-cta" data-bs-toggle="modal" data-bs-target="#certificateModal">
+              <i class="bi bi-award me-2"></i>Lihat Sertifikat
+            </button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <h3>3+</h3>
+              <p>Proyek</p>
+            </div>
+            <div class="stat-item">
+              <h3>1+</h3>
+              <p>Sertifikat</p>
+            </div>
+            <div class="stat-item">
+              <h3>1+</h3>
+              <p>Tahun Belajar</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 text-center">
+          <div class="hero-img-wrapper">
+            <img src="assets/img/img7.jpeg" alt="Ilustrasi Developer" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--  BAGIAN 3: PROFIL SAYA  -->
+  <section class="profile-section" id="profile">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Profil Saya</h2>
+        <p class="section-subtitle">Mengenal lebih dekat tentang latar belakang dan biodata saya</p>
+      </div>
+
+      <div class="row justify-content-center">
+        <!-- Kolom Biodata -->
+        <div class="col-lg-6 col-md-8">
+          <div class="profile-card text-center p-4 p-md-5">
+            <div class="profile-avatar-wrapper mb-3">
+              <img src="assets/img/img7.jpeg" alt="Foto Profil Nuzul Taufik" class="profile-img">
+            </div>
+            <h4 class="fw-bold mb-1">Nuzul Taufik</h4>
+            <span class="badge badge-role mb-3">Web &amp; UI/UX Student</span>
+            <p class="profile-bio text-muted px-lg-2 mb-4">
+              Mahasiswa semester 3 jurusan Teknik Informatika yang tertarik di bidang web development dan desain antarmuka. 
+              Selalu bersemangat untuk belajar teknologi baru dan mengasah kemampuan dalam merancang solusi digital yang berdampak.
+            </p>
+
+            <div class="profile-details text-start pt-3 border-top">
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-mortarboard-fill text-primary me-2"></i>
+                <span class="small text-muted">Pendidikan:</span>
+                <span class="small fw-semibold ms-auto">S1 Teknik Informatika (Sem. 3)</span>
+              </div>
+              <div class="d-flex align-items-center mb-2">
+                <i class="bi bi-geo-alt-fill text-primary me-2"></i>
+                <span class="small text-muted">Lokasi:</span>
+                <span class="small fw-semibold ms-auto">Polewali, Indonesia</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <i class="bi bi-envelope-fill text-primary me-2"></i>
+                <span class="small text-muted">Email:</span>
+                <a href="mailto:nuzultaufik@gmail.com" class="small fw-semibold ms-auto text-decoration-none text-dark">nuzultaufik@gmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--  BAGIAN 4: GRID KARTU PROYEK  -->
+  <section class="projects-section" id="projects">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Proyek Saya</h2>
+        <p class="section-subtitle">Beberapa proyek terbaik yang pernah saya kerjakan</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Website Portal Akademik -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card project-card">
+            <img src="assets/img/img1.png" class="card-img-top" alt="Website Portal Akademik">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Website Portal Akademik</h5>
+              <p class="card-text">Website yang memiliki fitur mengisi formulir data mahasiswa, menghitung beban studi dan nilai akhir.</p>
+              <div class="mb-3">
+                <span class="badge-tech">HTML</span>
+                <span class="badge-tech">CSS</span>
+                <span class="badge-tech">Bootstrap</span>
+              </div>
+              <a href="#projects" class="btn-project mt-auto d-flex align-items-center gap-1">
+                Lihat Detail <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aplikasi Mobile Pertalite -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card project-card">
+            <img src="assets/img/img3.png" class="card-img-top" alt="Aplikasi Mobile Pertalite">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Aplikasi Mobile Pertalite</h5>
+              <p class="card-text">Desain antarmuka aplikasi mobile untuk layanan pembelian bahan bakar Pertalite dengan user experience yang mudah.</p>
+              <div class="mb-3">
+                <span class="badge-tech">Figma</span>
+                <span class="badge-tech">UI/UX</span>
+                <span class="badge-tech">Prototype</span>
+              </div>
+              <a href="#projects" class="btn-project mt-auto d-flex align-items-center gap-1">
+                Lihat Detail <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Website Layanan Perpustakaan -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card project-card">
+            <img src="assets/img/img2.png" class="card-img-top" alt="Website Layanan Perpustakaan">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Website Layanan Perpustakaan</h5>
+              <p class="card-text">Aplikasi yang mengatur layanan penginputan data anggota dan menghitung denda serta rekap peminjaman suatu buku.</p>
+              <div class="mb-3">
+                <span class="badge-tech">HTML</span>
+                <span class="badge-tech">CSS</span>
+                <span class="badge-tech">Desktop</span>
+              </div>
+              <a href="#projects" class="btn-project mt-auto d-flex align-items-center gap-1">
+                Lihat Detail <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--  BAGIAN 5: FORM KONTAK  -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title">Hubungi Saya</h2>
+        <p class="section-subtitle">Punya pertanyaan atau ingin bekerja sama? Silakan kirim pesan!</p>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-7">
+          <div class="contact-form-wrapper p-4 p-md-5">
+            <form id="contactForm" onsubmit="event.preventDefault(); alert('Pesan Anda berhasil dikirim! Terima kasih.'); this.reset();">
+              <div class="mb-3">
+                <label for="nama" class="form-label fw-medium">Nama Lengkap <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="nama" placeholder="Masukkan nama lengkap" required minlength="3">
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label fw-medium">Alamat Email <span class="text-danger">*</span></label>
+                <input type="email" class="form-control" id="email" placeholder="contoh@email.com" required>
+              </div>
+              <div class="mb-3">
+                <label for="pesan" class="form-label fw-medium">Pesan <span class="text-danger">*</span></label>
+                <textarea class="form-control" id="pesan" rows="5" placeholder="Tulis pesan Anda di sini..." required minlength="10"></textarea>
+              </div>
+              <button type="submit" class="btn btn-submit">
+                <i class="bi bi-send me-2"></i>Kirim Pesan
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="contact-info-card">
+            <h4 class="fw-bold mb-4"><i class="bi bi-chat-dots me-2"></i>Info Kontak</h4>
+            <div class="d-flex align-items-center gap-3 mb-3 contact-info-item">
+              <div class="icon-box"><i class="bi bi-envelope"></i></div>
+              <div>
+                <small class="opacity-75">Email</small>
+                <p class="mb-0"><a href="mailto:nuzultaufik@gmail.com" class="contact-link">nuzultaufik@gmail.com</a></p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-3 mb-3 contact-info-item">
+              <div class="icon-box"><i class="bi bi-telephone"></i></div>
+              <div>
+                <small class="opacity-75">Telepon</small>
+                <p class="mb-0">+62 82????????</p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-3 mb-3 contact-info-item">
+              <div class="icon-box"><i class="bi bi-discord"></i></div>
+              <div>
+                <small class="opacity-75">Discord</small>
+                <p class="mb-0"><a href="https://discord.com/users/754654992715218945" target="_blank" rel="noopener noreferrer" class="contact-link">nuzultaufik</a></p>
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-3 mb-3 contact-info-item">
+              <div class="icon-box"><i class="bi bi-geo-alt"></i></div>
+              <div>
+                <small class="opacity-75">Lokasi</small>
+                <p class="mb-0"><a href="https://maps.google.com/?q=Polewali,+Indonesia" target="_blank" rel="noopener noreferrer" class="contact-link">Polewali, Indonesia</a></p>
+              </div>
+            </div>
+            <hr class="opacity-25 my-4">
+            <p class="mb-2 fw-semibold small">Ikuti &amp; Hubungi Saya di Media Sosial</p>
+            <div class="social-links d-flex gap-2">
+              <a href="#" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="bi bi-github"></i></a>
+              <a href="https://www.instagram.com/nuzul.tfk/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X"><i class="bi bi-twitter-x"></i></a>
+              <a href="https://discord.com/users/754654992715218945" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="bi bi-discord"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--  BAGIAN 6: MODAL SERTIFIKAT  -->
+  <div class="modal fade" id="certificateModal" tabindex="-1" aria-labelledby="certificateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content shadow border-0">
+        <div class="modal-header">
+          <h5 class="modal-title fw-semibold" id="certificateModalLabel">
+            <i class="bi bi-award me-2"></i>Sertifikat &amp; Pencapaian
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <!-- Item Info Sertifikat -->
+          <div class="certificate-item mb-3">
+            <div class="cert-icon">
+              <i class="bi bi-patch-check-fill"></i>
+            </div>
+            <div class="cert-info">
+              <h6 class="mb-0 fw-bold">Certificate Of Completion</h6>
+              <small class="text-muted">Skill Our Future — 2026</small>
+            </div>
+          </div>
+
+          <!-- Tampilan Gambar Sertifikat -->
+          <div class="cert-image-wrapper text-center shadow-sm">
+            <img src="assets/img/img6.jpg" alt="Sertifikat Skill Our Future" class="cert-preview-img" loading="lazy">
+          </div>
+        </div>
+        <div class="modal-footer border-0 justify-content-between px-4 pb-4">
+          <a href="assets/img/img6.jpg" target="_blank" class="btn btn-outline-cta btn-sm">
+            <i class="bi bi-arrows-fullscreen me-2"></i>Buka Gambar Penuh
+          </a>
+          <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  FLOATING BUTTON SERTIFIKAT  -->
+  <button class="btn btn-cta btn-floating shadow-lg"
+          data-bs-toggle="modal" data-bs-target="#certificateModal"
+          aria-label="Lihat Sertifikat"
+          title="Lihat Sertifikat">
+    <i class="bi bi-award"></i>
+  </button>
+
+  <!--  FOOTER  -->
+  <footer>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="mb-0">&copy; 2026 <strong>Portofolio.Nuzul</strong></p>
+        </div>
+        <div class="col-md-6 text-center text-md-end mt-2 mt-md-0">
+          <a href="#hero" class="me-3">Beranda</a>
+          <a href="#profile" class="me-3">Profil</a>
+          <a href="#projects" class="me-3">Proyek</a>
+          <a href="#contact">Kontak</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
